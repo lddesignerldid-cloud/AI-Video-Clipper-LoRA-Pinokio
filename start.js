@@ -6,6 +6,10 @@ module.exports = {
       params: {
         venv: "env",
         path: "app",
+        env: {
+          STREAMLIT_SERVER_HEADLESS: "true",
+          STREAMLIT_BROWSER_GATHER_USAGE_STATS: "false"
+        },
         message: [
           "streamlit run app.py --server.port {{port}} --server.address 127.0.0.1",
         ],

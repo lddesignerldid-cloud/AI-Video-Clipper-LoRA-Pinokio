@@ -1,6 +1,6 @@
 {
-  "title": "AI-Video-Clipper-LoRA",
-  "description": "",
+  "title": "AI Video Clipper & LoRA Captioner",
+  "description": "Automatically clip videos and generate captions for LoRA training using advanced vision models like Gemma-3, Qwen3-VL, and Qwen2-VL.",
   "icon": "icon.png",
   "links": [
     {

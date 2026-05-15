@@ -62,6 +62,13 @@ module.exports = {
         path: "app/.streamlit/config.toml",
         content: "[browser]\ngatherUsageStats = false\n\n[server]\nheadless = true\nmaxUploadSize = 4096"
       }
+    },
+    {
+      method: "fs.write",
+      params: {
+        path: "app/.streamlit/credentials.toml",
+        content: "[general]\nemail = \"\""
+      }
     }
   ]
 }
