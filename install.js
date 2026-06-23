@@ -46,6 +46,7 @@ module.exports = {
     },
     // llama-cpp-python for others
     {
+      comment: "Install basic CPU version if NOT a Windows NVIDIA system",
       when: "{{!(gpu === 'nvidia' && platform === 'win32')}}",
       method: "shell.run",
       params: {
@@ -53,6 +54,18 @@ module.exports = {
         path: "app",
         message: [
           "uv pip install llama-cpp-python"
+        ]
+      }
+    },
+    {
+      comment: "Install CUDA-accelerated version for Windows NVIDIA systems (Fixes the crash)",
+      when: "{{gpu === 'nvidia' && platform === 'win32'}}",
+      method: "shell.run",
+      params: {
+        venv: "env",
+        path: "app",
+        message: [
+          "uv pip install llama-cpp-python --index-url https://github.io"
         ]
       }
     },
