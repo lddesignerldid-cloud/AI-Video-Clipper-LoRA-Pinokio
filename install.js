@@ -33,6 +33,9 @@ module.exports = {
       }
     },
     // llama-cpp-python for windows nvidia
+    // Uses JamePeng prebuilt wheel with full CUDA kernels.
+    // The default abetlen/llama-cpp-python cu128 index silently falls back to a broken CPU-only build
+    // on RTX 50-series (Blackwell) hardware, causing a STATUS_ILLEGAL_INSTRUCTION crash on llama_init_from_model.
     {
       when: "{{gpu === 'nvidia' && platform === 'win32'}}",
       method: "shell.run",
@@ -40,7 +43,7 @@ module.exports = {
         venv: "env",
         path: "app",
         message: [
-          "uv pip install https://github.com/cyberbol/AI-Video-Clipper-LoRA/releases/download/v5.0-deps/llama_cpp_python-0.3.26+cu128-cp310-cp310-win_amd64.whl"
+          "uv pip install https://github.com/JamePeng/llama-cpp-python/releases/download/v0.3.40-cu128-win-20260608/llama_cpp_python-0.3.40+cu128-cp310-cp310-win_amd64.whl"
         ]
       }
     },
@@ -57,18 +60,7 @@ module.exports = {
         ]
       }
     },
-    {
-      comment: "Install CUDA-accelerated version for Windows NVIDIA systems (Fixes the crash)",
-      when: "{{gpu === 'nvidia' && platform === 'win32'}}",
-      method: "shell.run",
-      params: {
-        venv: "env",
-        path: "app",
-        message: [
-          "uv pip install llama-cpp-python --index-url https://github.io"
-        ]
-      }
-    },
+
     {
       method: "fs.write",
       params: {
