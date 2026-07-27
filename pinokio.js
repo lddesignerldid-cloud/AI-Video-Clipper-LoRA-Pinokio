@@ -1,6 +1,6 @@
 const path = require('path')
 module.exports = {
-  version: "5.1",
+  version: "5.2",
   menu: async (kernel, info) => {
     let installed = info.exists("app/env")
     let running = {
@@ -8,7 +8,8 @@ module.exports = {
       start: info.running("start.js"),
       update: info.running("update.js"),
       reset: info.running("reset.js"),
-      link: info.running("link.js")
+      link: info.running("link.js"),
+      repair: info.running("repair.js")
     }
     if (running.install) {
       return [{
@@ -46,6 +47,13 @@ module.exports = {
           text: "Updating",
           href: "update.js",
         }]
+      } else if (running.repair) {
+        return [{
+          default: true,
+          icon: 'fa-solid fa-terminal',
+          text: "Repairing",
+          href: "repair.js",
+        }]
       } else if (running.reset) {
         return [{
           default: true,
@@ -70,6 +78,10 @@ module.exports = {
           icon: "fa-solid fa-plug",
           text: "Update",
           href: "update.js",
+        }, {
+          icon: "fa-solid fa-screwdriver-wrench",
+          text: "<div><strong>Repair Vision Engine</strong><div>Fix WinError 0xc000001d crash (RTX 50-series)</div></div>",
+          href: "repair.js",
         }, {
           icon: "fa-solid fa-plug",
           text: "Install",
